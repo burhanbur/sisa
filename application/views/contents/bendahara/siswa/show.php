@@ -27,8 +27,8 @@
                 	<td class="center"><?php echo $no++; ?></td>
                   <td class="center"><?php echo $data->nomor_induk ?></td>
                   <td><?php echo $data->nama ?></td>
-                  <td class="center"><?php echo $data->nama_kelas ?></td>
-                  <td class="center"><?php echo $data->n_status ?></td>
+                  <td class="center"><?php echo $data->kelas ?></td>
+                  <td class="center"><?php echo $data->status ?></td>
                 	<td class="center">
 		                <a href="#" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
                     <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>
