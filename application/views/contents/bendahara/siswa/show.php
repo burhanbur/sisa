@@ -1,7 +1,8 @@
-		<a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah Siswa</a>
+		<!-- <a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah Siswa</a> -->
 
-      <?php $this->load->view('contents/bendahara/siswa/create'); ?>
-     	<br><br>
+      <?php //$this->load->view('contents/bendahara/siswa/create'); ?>
+    <a class="btn btn-success" href="<?php echo base_url('bendahara/siswa/create'); ?>"><i class="fa fa-user-plus"></i>&nbsp;Tambah Siswa</a>
+      <br><br>
 		<div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Siswa</h3>
@@ -30,9 +31,9 @@
                   <td class="center"><?php echo $data->kelas ?></td>
                   <td class="center"><?php echo $data->status ?></td>
                 	<td class="center">
-		                <a href="#" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
-                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>
-                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove" ></i></a>
+		                <a href="<?php echo base_url('bendahara/siswa/detail/'.$data->nomor_induk) ?>" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
+                    <a href="<?php echo base_url('bendahara/siswa/edit/'.$data->nomor_induk) ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>
+                    <a href="<?php echo base_url('bendahara/siswa/delete/'.$data->id) ?>" class="btn btn-danger btn-xs confirmation"><i class="fa fa-remove" ></i></a>
                 	</td>
                 </tr>
 	              <?php } ?>

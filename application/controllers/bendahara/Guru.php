@@ -19,7 +19,7 @@ class Guru extends CI_Controller {
 		$data['sub_judul']	= 'Guru';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
-		$data['data']		= $this->m_siswa->showGuru();
+		$data['data']		= $this->m_guru->showGuru();
 
 		$this->load->view('includes/main', $data);
 	}

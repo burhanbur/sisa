@@ -39,7 +39,7 @@ class Auth extends CI_Controller
 				$sess_data['id'] = $sess->id;
 				$sess_data['nama'] = $sess->nama;
 				$sess_data['username'] = $sess->username;
-				$sess_data['role'] = $sess->role;
+				$sess_data['role'] = $sess->role_id;
 				$sess_data['login_terakhir'] = $sess->login_terakhir;
 				$this->session->set_userdata($sess_data);
 			}
@@ -47,7 +47,7 @@ class Auth extends CI_Controller
 			$this->db->where('id', $sess->id)->update($this->table, array('login_terakhir' => date('Y-m-d H:i:s')));
 
             $role = $this->session->userdata('role');
-
+            
   			if ($role == 2) {
 				redirect('bendahara/home');
 			}else{

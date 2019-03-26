@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Mar 2019 pada 18.29
+-- Generation Time: 26 Mar 2019 pada 18.24
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -106,6 +106,7 @@ INSERT INTO `mst_guru` (`id`, `nip`, `nama`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `mst_kelas` (
   `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `jurusan_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -114,8 +115,8 @@ CREATE TABLE `mst_kelas` (
 -- Dumping data untuk tabel `mst_kelas`
 --
 
-INSERT INTO `mst_kelas` (`id`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'XII - 2', '2019-03-23 16:22:47', '2019-03-23 16:22:47');
+INSERT INTO `mst_kelas` (`id`, `nama`, `jurusan_id`, `created_at`, `updated_at`) VALUES
+(1, 'XII MM-2', 4, '2019-03-23 16:22:47', '2019-03-25 15:34:46');
 
 -- --------------------------------------------------------
 
@@ -126,20 +127,23 @@ INSERT INTO `mst_kelas` (`id`, `nama`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `mst_siswa` (
   `id` int(11) NOT NULL,
   `nomor_induk` varchar(255) NOT NULL,
+  `nomor_induk_nasional` varchar(255) DEFAULT NULL,
   `nama` varchar(255) NOT NULL,
   `kelas_id` int(11) NOT NULL,
+  `jurusan_id` int(11) NOT NULL,
   `alamat` text NOT NULL,
-  `kota_lahir` varchar(255) NOT NULL,
+  `tempat_lahir` varchar(255) NOT NULL,
   `tgl_lahir` date NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
   `agama_id` int(11) NOT NULL,
   `no_hp` varchar(12) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `asal_sekolah` varchar(255) NOT NULL,
   `tahun_masuk` varchar(255) NOT NULL,
   `status_id` tinyint(1) NOT NULL,
-  `nama_ayah` varchar(255) NOT NULL,
-  `nama_ibu` varchar(255) NOT NULL,
+  `nama_ayah` varchar(255) DEFAULT NULL,
+  `nama_ibu` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -148,8 +152,8 @@ CREATE TABLE `mst_siswa` (
 -- Dumping data untuk tabel `mst_siswa`
 --
 
-INSERT INTO `mst_siswa` (`id`, `nomor_induk`, `nama`, `kelas_id`, `alamat`, `kota_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama_id`, `no_hp`, `email`, `asal_sekolah`, `tahun_masuk`, `status_id`, `nama_ayah`, `nama_ibu`, `created_at`, `updated_at`) VALUES
-(1, '92317077', 'Burhan Mafazi', 1, 'Jl. Ngarai No. 5 Kelapa Dua Cimanggis Depok', 'JAKARTA', '1995-05-16', 'Laki-Laki', 1, '085695682973', 'burhanmafazi@gmail.com', 'SMP N 102 JAKARTA', '2018', 1, '', '', '2019-03-23 16:23:49', '2019-03-24 17:22:54');
+INSERT INTO `mst_siswa` (`id`, `nomor_induk`, `nomor_induk_nasional`, `nama`, `kelas_id`, `jurusan_id`, `alamat`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama_id`, `no_hp`, `email`, `asal_sekolah`, `tahun_masuk`, `status_id`, `nama_ayah`, `nama_ibu`, `foto`, `created_at`, `updated_at`) VALUES
+(1, '92317077', '', 'Burhan Mafazi', 1, 4, 'Jl. Ngarai No. 5 Kelapa Dua Cimanggis Depok', 'JAKARTA', '1995-05-16', 'Laki-Laki', 1, '085695682973', 'burhanmafazi@gmail.com', 'SMP N 102 JAKARTA', '2018', 1, '', '', '', '2019-03-23 16:23:49', '2019-03-25 15:32:31');
 
 -- --------------------------------------------------------
 
@@ -179,13 +183,40 @@ INSERT INTO `ref_agama` (`id`, `nama`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `ref_jurusan`
+--
+
+CREATE TABLE `ref_jurusan` (
+  `id` int(11) NOT NULL,
+  `kode_jurusan` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `ref_jurusan`
+--
+
+INSERT INTO `ref_jurusan` (`id`, `kode_jurusan`, `nama`, `created_at`, `updated_at`) VALUES
+(1, 'DG', 'Desain Grafis', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
+(2, 'PG', 'Produksi Grafika', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
+(3, 'TKJ', 'Teknik Komputer dan Jaringan', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
+(4, 'MM', 'Multimedia', '2019-03-25 15:28:52', '2019-03-25 15:33:59');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `ref_periode`
 --
 
 CREATE TABLE `ref_periode` (
   `id` int(11) NOT NULL,
   `tahun` varchar(255) NOT NULL,
+  `semester` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `tahun_ajaran` varchar(255) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -194,8 +225,8 @@ CREATE TABLE `ref_periode` (
 -- Dumping data untuk tabel `ref_periode`
 --
 
-INSERT INTO `ref_periode` (`id`, `tahun`, `status`, `created_at`, `updated_at`) VALUES
-(1, '2018/2019', 1, '2019-03-23 16:19:23', '2019-03-23 16:20:35');
+INSERT INTO `ref_periode` (`id`, `tahun`, `semester`, `status`, `tahun_ajaran`, `deskripsi`, `created_at`, `updated_at`) VALUES
+(1, '2018', 1, 1, '2018/2019', 'GANJIL', '2019-03-23 16:19:23', '2019-03-25 15:32:48');
 
 -- --------------------------------------------------------
 
@@ -236,8 +267,8 @@ CREATE TABLE `ref_status` (
 --
 
 INSERT INTO `ref_status` (`id`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'Aktif', '2019-03-24 17:09:09', '2019-03-24 17:09:09'),
-(2, 'Non-aktif', '2019-03-24 17:09:09', '2019-03-24 17:09:09');
+(1, 'AKTIF', '2019-03-24 17:09:09', '2019-03-25 15:33:03'),
+(2, 'NON-AKTIF', '2019-03-24 17:09:09', '2019-03-25 15:33:03');
 
 -- --------------------------------------------------------
 
@@ -261,7 +292,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role_id`, `created_at`, `updated_at`, `login_terakhir`) VALUES
-(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-03-24 10:48:26');
+(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-03-26 09:01:44');
 
 --
 -- Indexes for dumped tables
@@ -295,6 +326,12 @@ ALTER TABLE `mst_siswa`
 -- Indexes for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ref_jurusan`
+--
+ALTER TABLE `ref_jurusan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -348,13 +385,19 @@ ALTER TABLE `mst_kelas`
 -- AUTO_INCREMENT for table `mst_siswa`
 --
 ALTER TABLE `mst_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ref_jurusan`
+--
+ALTER TABLE `ref_jurusan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ref_periode`
