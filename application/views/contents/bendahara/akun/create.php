@@ -14,7 +14,7 @@
               <h2 class="box-title">TAMBAH DATA</h2>
             </div>            
 
-            <form role="form" action="<?php echo base_url('bendahara/kelas/store'); ?>" method="POST" enctype="multipart/form-data">
+            <form role="form" action="<?php echo base_url('bendahara/akun/store'); ?>" method="POST" enctype="multipart/form-data">
               <!-- /.box-header -->
               <div class="box-body">
                   <div class="form-group">
@@ -22,11 +22,19 @@
                     <input type="text" class="form-control" name="nama" required autofocus>
                   </div>
                   <div class="form-group">
-                    <label>Jurusan *</label>
-                    <select name="kelas" id="kelas_id" class="form-control" required autofocus>
-                      <option value=""> ----- Pilih Jurusan ----- </option>
+                    <label>Username *</label>
+                    <input type="text" class="form-control" name="username" required autofocus>
+                  </div>
+                  <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" class="form-control" name="password" required autofocus>
+                  </div>
+                  <div class="form-group">
+                    <label>Role *</label>
+                    <select name="role" class="form-control" required autofocus>
+                      <option value=""> ----- Pilih Role ----- </option>
                       <?php 
-                        foreach ($jurusan as $row) { ?>
+                        foreach ($roles as $row) { ?>
                         <option value="<?php echo $row->id;?>"><?php echo $row->nama;?></option>
                         <?php }
                       ?>
@@ -37,7 +45,7 @@
 
               <div class="box-footer">
                 <div class="pull-right">
-                  <a href="<?php echo base_url('bendahara/kelas'); ?>" class="btn btn-default">Kembali</a>
+                  <a href="<?php echo base_url('bendahara/akun'); ?>" class="btn btn-default">Kembali</a>
                   <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
              </div>

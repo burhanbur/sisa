@@ -1,24 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_guru extends CI_Model {
+class M_jurusan extends CI_Model {
 
-	public function showGuru()
+	public function showJurusan()
 	{
 		$this->db->select('t.*, rs.nama as status');
-		$this->db->from('mst_guru as t');
+		$this->db->from('ref_jurusan as t');
 		$this->db->join('ref_status as rs', 't.status_id = rs.id', 'left');
 
 		$query = $this->db->get();
 		return $query;
 	}
 
-	public function detailGuru($nip)
+	public function detailJurusan($id)
 	{
 		$this->db->select('t.*, rs.nama as status');
-		$this->db->from('mst_guru as t');
+		$this->db->from('ref_jurusan as t');
 		$this->db->join('ref_status as rs', 't.status_id = rs.id', 'left');
-		$this->db->where('t.nip', $nip);
+		$this->db->where('t.id', $id);
 
 		$query = $this->db->get();
 		return $query;

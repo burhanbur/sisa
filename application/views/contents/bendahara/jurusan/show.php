@@ -1,11 +1,11 @@
-		<a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah Siswa</a>
+		<a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah Jurusan</a>
 
-      <?php $this->load->view('contents/bendahara/siswa/createModal'); ?>
-    <!-- <a class="btn btn-success" href="<?php // echo base_url('bendahara/siswa/create'); ?>"><i class="fa fa-user-plus"></i>&nbsp;Tambah Siswa</a> -->
+      <?php $this->load->view('contents/bendahara/jurusan/createModal'); ?>
+    <!-- <a class="btn btn-success" href="<?php //echo base_url('bendahara/jurusan/create'); ?>"><i class="fa fa-user-plus"></i>&nbsp;Tambah jurusan</a> -->
       <br><br>
 		<div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Siswa</h3>
+              <h3 class="box-title">Data Jurusan</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -13,9 +13,8 @@
                 <thead>
                 <tr>
                   <th class="center" style="width: 5%">No</th>
-                  <th class="center" style="width: 15%">Nomor Induk</th>
+                  <th class="center" style="width: 15%">Kode</th>
                   <th class="center" style="width: 35%">Nama</th>
-                  <th class="center" style="width: 20%">Kelas</th>
                   <th class="center" style="width: 10%">Status</th>
                   <th class="center" style="width: 15%">Aksi</th>
                 </tr>
@@ -26,14 +25,13 @@
                 ?>  
                 <tr>
                 	<td class="center"><?php echo $no++; ?></td>
-                  <td class="center"><?php echo $data->nomor_induk ?></td>
+                  <td class="center"><?php echo $data->kode_jurusan ?></td>
                   <td><?php echo $data->nama ?></td>
-                  <td class="center"><?php echo $data->kelas ?></td>
                   <td class="center"><?php echo $data->status ?></td>
                 	<td class="center">
-		                <a href="<?php echo base_url('bendahara/siswa/detail/'.$data->nomor_induk) ?>" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
-                    <a href="<?php echo base_url('bendahara/siswa/edit/'.$data->nomor_induk) ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>
-                    <a href="<?php echo base_url('bendahara/siswa/delete/'.$data->id) ?>" class="btn btn-danger btn-xs confirmation"><i class="fa fa-remove" ></i></a>
+		                <a href="<?php echo base_url('bendahara/jurusan/detail/'.$data->id) ?>" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
+                    <a href="<?php echo base_url('bendahara/jurusan/edit/'.$data->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>
+                    <a href="<?php echo base_url('bendahara/jurusan/delete/'.$data->id) ?>" class="btn btn-danger btn-xs confirmation"><i class="fa fa-remove" ></i></a>
                 	</td>
                 </tr>
 	              <?php } ?>

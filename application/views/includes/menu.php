@@ -34,7 +34,7 @@
         <?php 
         $arrUri = array();
         array_push($arrUri, $uri);
-        $menu = array('siswa', 'guru', 'kelas', 'anggaranpendapatan', 'anggaranpengeluaran');
+        $menu = array('siswa', 'guru', 'kelas', 'jurusan', 'anggaranpendapatan', 'anggaranpengeluaran');
 
         if ($role == 2) { ?>
           <li class="<?php foreach ($arrUri as $arr) if (in_array($arr, $menu)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
@@ -48,6 +48,7 @@
             <ul class="treeview-menu">
               <li class="<?php if ($uri == 'siswa') echo 'active' ?>"><a href="<?php echo base_url('bendahara/siswa'); ?>"><i class="fa fa-circle-o"></i> Siswa </a></li>
               <li class="<?php if ($uri == 'guru') echo 'active' ?>"><a href="<?php echo base_url('bendahara/guru'); ?>"><i class="fa fa-circle-o"></i> Guru </a></li>
+              <li class="<?php if ($uri == 'jurusan') echo 'active' ?>"><a href="<?php echo base_url('bendahara/jurusan'); ?>"><i class="fa fa-circle-o"></i> Jurusan </a></li>
               <li class="<?php if ($uri == 'kelas') echo 'active' ?>"><a href="<?php echo base_url('bendahara/kelas'); ?>"><i class="fa fa-circle-o"></i> Kelas </a></li>
 
               <?php 
@@ -69,8 +70,23 @@
             </ul>
           </li>
 
-          <li class="<?php if($uri == 'setting') echo 'active' ?>">
-            <a href="#"><i class="fa fa-wrench"></i> <span>Pengaturan</span></a>
+          <?php 
+          $settings = array();
+          array_push($settings, $uri);
+          $menuSetting = array('akun', 'periode');
+          ?>
+          <li class="<?php foreach ($settings as $setting) if (in_array($setting, $menuSetting)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+            <a href="#">
+              <i class="fa fa-wrench"></i>
+              <span>Pengaturan</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="<?php if ($uri == 'akun') echo 'active' ?>"><a href="<?php echo base_url('bendahara/akun'); ?>"><i class="fa fa-circle-o"></i> Akun </a></li>
+              <li class="<?php if ($uri == 'periode') echo 'active' ?>"><a href="<?php echo base_url('bendahara/periode'); ?>"><i class="fa fa-circle-o"></i> Periode </a></li>
+            </ul>
           </li>
         <?php } else { ?>
 

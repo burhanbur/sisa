@@ -8,21 +8,24 @@
             <div class="box-body box-profile">
               <!-- <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture"> -->
 
-              <h3 class="profile-username text-center">Biodata Kelas</h3>
+              <h3 class="profile-username text-center">Biodata Jurusan</h3>
 
               <!-- <p class="text-muted text-center">Software Engineer</p> -->
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                    <b class="col-md-2">Nama Kelas</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->nama; ?>
+                    <b class="col-md-2">Nama</b> <b class="col-md-0">:</b> <?php echo $data->result()[0]->nama; ?>
                 </li>
                 <li class="list-group-item">
-                    <b class="col-md-2">Jurusan</b> <b class="col-md-0">:</b> <?php echo $data->result()[0]->jurusan; ?>
+                    <b class="col-md-2">Kode Jurusan</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->kode_jurusan; ?>
+                </li>
+                <li class="list-group-item">
+                    <b class="col-md-2">Status</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->status; ?>
                 </li>
                 
               </ul>
 
-              <a href="<?php echo base_url('bendahara/kelas/edit/'.$data->result()[0]->id) ?>" class="btn btn-primary btn-block"><b>Ubah</b></a>
+              <a href="<?php echo base_url('bendahara/jurusan/edit/'.$data->result()[0]->id) ?>" class="btn btn-primary btn-block"><b>Ubah</b></a>
             </div>
             <!-- /.box-body -->
           </div>

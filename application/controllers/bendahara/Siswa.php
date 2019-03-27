@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
 class Siswa extends CI_Controller {
 	var $table = 'mst_siswa';
 
@@ -24,6 +22,16 @@ class Siswa extends CI_Controller {
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_siswa->showSiswa();
+
+		// dropdown data
+		$data['agama']		= $this->crud->getTable('ref_agama');
+		$data['status']		= $this->crud->getTable('ref_status');
+		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['kelas']		= $this->crud->getTable('mst_kelas');
+
+		// chained
+		$data['jurusan_selected'] = '';
+		$data['kelas_selected'] = '';
 
 		$this->load->view('includes/main', $data);
 	}

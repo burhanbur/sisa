@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kelas extends CI_Controller {
-	var $table = 'mst_kelas';
+class Akun extends CI_Controller {
+	var $table = 'users';
 
 	public function __construct() {
 		parent::__construct();
 		$this->validation->validate();
-		$this->load->model('m_kelas');
+		$this->load->model('m_login');
 		if ($this->session->userdata('role')!=2) {
 			echo "<script>alert('Anda tidak berhak mengakses halaman ini!');history.go(-1);</script>";
 		}
@@ -16,27 +16,27 @@ class Kelas extends CI_Controller {
 
 	public function index()
 	{
-		$data['content']	= 'contents/bendahara/kelas/show';
+		$data['content']	= 'contents/bendahara/akun/show';
 		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['sub_judul']	= 'Akun';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
-		$data['data']		= $this->m_kelas->showKelas();
+		$data['data']		= $this->m_login->showAkun();
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['roles']		= $this->crud->getTable('ref_role');
 
 		$this->load->view('includes/main', $data);
 	}
 
 	public function create()
 	{
-		$data['content']	= 'contents/bendahara/kelas/create';
+		$data['content']	= 'contents/bendahara/akun/create';
 		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'kelas';
+		$data['sub_judul']	= 'Akun';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['roles']		= $this->crud->getTable('ref_role');
 
 		$this->load->view('includes/main', $data);
 	}
@@ -45,13 +45,15 @@ class Kelas extends CI_Controller {
 	{
 		$data = array(
                 'nama' => $this->input->post('nama'),
-                'jurusan_id' => $this->input->post('jurusan')
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+                'role_id' => $this->input->post('role')
             );
 
 		$insert = $this->crud->getInsert($this->table, $data);
 
 		if ($insert) {
-			redirect('bendahara/kelas');
+			redirect('bendahara/akun');
 		}
 	}
 
@@ -59,12 +61,12 @@ class Kelas extends CI_Controller {
 	{
 		$id = $this->uri->segment(4);
 
-		$data['content']	= 'contents/bendahara/kelas/detail';
+		$data['content']	= 'contents/bendahara/akun/detail';
 		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['sub_judul']	= 'Akun';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
-		$data['data']		= $this->m_kelas->detailKelas($id);
+		$data['data']		= $this->m_login->detailAkun($id);
 
 		$this->load->view('includes/main', $data);
 	}
@@ -73,14 +75,14 @@ class Kelas extends CI_Controller {
 	{
 		$id = $this->uri->segment(4);
 
-		$data['content']	= 'contents/bendahara/kelas/edit';
+		$data['content']	= 'contents/bendahara/akun/edit';
 		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['sub_judul']	= 'akun';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
-		$data['data']		= $this->m_kelas->detailkelas($id)->row();
+		$data['data']		= $this->m_login->detailAkun($id)->row();
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['roles']		= $this->crud->getTable('ref_role');
 
 		$this->load->view('includes/main', $data);
 	}
@@ -92,13 +94,15 @@ class Kelas extends CI_Controller {
 
 		$data = array(
                 'nama' => $this->input->post('nama'),
-                'jurusan_id' => $this->input->post('jurusan')
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password')),
+                'role_id' => $this->input->post('role')
             );
 
         $update = $this->crud->getUpdate($param, $paramVal, $this->table, $data);
 
         if ($update) {
-			redirect('bendahara/kelas');
+			redirect('bendahara/akun');
 		} else {
 			
 		}
@@ -111,7 +115,7 @@ class Kelas extends CI_Controller {
 		$delete = $this->crud->getDelete($param, $paramVal, $this->table);
 
 		if ($delete) {
-			redirect('bendahara/kelas');
+			redirect('bendahara/akun');
 		} else {
 
 		}

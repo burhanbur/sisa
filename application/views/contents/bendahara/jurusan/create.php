@@ -14,30 +14,28 @@
               <h2 class="box-title">TAMBAH DATA</h2>
             </div>            
 
-            <form role="form" action="<?php echo base_url('bendahara/kelas/store'); ?>" method="POST" enctype="multipart/form-data">
+            <form role="form" action="<?php echo base_url('bendahara/jurusan/store'); ?>" method="POST" enctype="multipart/form-data">
               <!-- /.box-header -->
               <div class="box-body">
+                  <div class="form-group">
+                    <label>Kode Jurusan *</label>
+                    <input type="text" class="form-control" name="kode" required autofocus>
+                  </div>
                   <div class="form-group">
                     <label>Nama *</label>
                     <input type="text" class="form-control" name="nama" required autofocus>
                   </div>
                   <div class="form-group">
-                    <label>Jurusan *</label>
-                    <select name="kelas" id="kelas_id" class="form-control" required autofocus>
-                      <option value=""> ----- Pilih Jurusan ----- </option>
-                      <?php 
-                        foreach ($jurusan as $row) { ?>
-                        <option value="<?php echo $row->id;?>"><?php echo $row->nama;?></option>
-                        <?php }
-                      ?>
-                      </select>
+                    <label>Status *</label>
+                    <input type="radio" required autofocus name="status" value="1"> AKTIF  &nbsp; &nbsp; 
+                    <input type="radio" name="status" value="0"> NON-AKTIF  &nbsp; &nbsp;
                   </div>
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <div class="pull-right">
-                  <a href="<?php echo base_url('bendahara/kelas'); ?>" class="btn btn-default">Kembali</a>
+                  <a href="<?php echo base_url('bendahara/jurusan'); ?>" class="btn btn-default">Kembali</a>
                   <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
              </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Mar 2019 pada 18.24
+-- Generation Time: 27 Mar 2019 pada 17.54
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -86,6 +86,7 @@ CREATE TABLE `mst_guru` (
   `id` int(11) NOT NULL,
   `nip` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `status_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -94,8 +95,8 @@ CREATE TABLE `mst_guru` (
 -- Dumping data untuk tabel `mst_guru`
 --
 
-INSERT INTO `mst_guru` (`id`, `nip`, `nama`, `created_at`, `updated_at`) VALUES
-(1, '216105', 'Septiansah Nur Aziz', '2019-03-23 16:25:18', '2019-03-23 16:25:18');
+INSERT INTO `mst_guru` (`id`, `nip`, `nama`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, '216105', 'Septiansah Nur Aziz', 1, '2019-03-23 16:25:18', '2019-03-27 15:34:43');
 
 -- --------------------------------------------------------
 
@@ -190,6 +191,7 @@ CREATE TABLE `ref_jurusan` (
   `id` int(11) NOT NULL,
   `kode_jurusan` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `status_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -198,11 +200,11 @@ CREATE TABLE `ref_jurusan` (
 -- Dumping data untuk tabel `ref_jurusan`
 --
 
-INSERT INTO `ref_jurusan` (`id`, `kode_jurusan`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'DG', 'Desain Grafis', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
-(2, 'PG', 'Produksi Grafika', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
-(3, 'TKJ', 'Teknik Komputer dan Jaringan', '2019-03-25 15:28:52', '2019-03-25 15:33:59'),
-(4, 'MM', 'Multimedia', '2019-03-25 15:28:52', '2019-03-25 15:33:59');
+INSERT INTO `ref_jurusan` (`id`, `kode_jurusan`, `nama`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, 'DG', 'Desain Grafis', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
+(2, 'PG', 'Produksi Grafika', 1, '2019-03-25 15:28:52', '2019-03-27 16:52:59'),
+(3, 'TKJ', 'Teknik Komputer dan Jaringan', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
+(4, 'MM', 'Multimedia', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32');
 
 -- --------------------------------------------------------
 
@@ -292,7 +294,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role_id`, `created_at`, `updated_at`, `login_terakhir`) VALUES
-(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-03-26 09:01:44');
+(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-03-27 09:00:12');
 
 --
 -- Indexes for dumped tables
@@ -373,19 +375,19 @@ ALTER TABLE `mst_anggaran_masuk`
 -- AUTO_INCREMENT for table `mst_guru`
 --
 ALTER TABLE `mst_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mst_kelas`
 --
 ALTER TABLE `mst_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `mst_siswa`
 --
 ALTER TABLE `mst_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ref_agama`
@@ -397,7 +399,7 @@ ALTER TABLE `ref_agama`
 -- AUTO_INCREMENT for table `ref_jurusan`
 --
 ALTER TABLE `ref_jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ref_periode`
@@ -421,7 +423,7 @@ ALTER TABLE `ref_status`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

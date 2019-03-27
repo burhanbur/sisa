@@ -15,7 +15,7 @@ class Home extends CI_Controller {
 	{
 		$data['content']	= 'contents/bendahara/home';
 		$data['judul']		= 'Beranda';
-		$data['sub_judul']	= '';
+		$data['sub_judul']	= 'Dashboard';
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 

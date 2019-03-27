@@ -47,14 +47,16 @@
 <!-- JQueryChained -->
 <script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.chained.min.js"></script>
 <!-- SweetAlert -->
-<script src="<?php echo base_url();?>assets/sweetalert/dist/sweetalert.js"></script>
+<script src="<?php echo base_url();?>assets/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
 	$('.confirmation').on('click', function () {
     	return confirm('Apakah anda yakin akan menghapus data ini?');
  	});
 
-  $("#kelas_id").chained("#jurusan_id");
+  $(document).ready(function () {
+        $("#kelas_id").chainedTo("#jurusan_id");
+    });
 
   $(function () {
     $('#example1').DataTable()
