@@ -10,7 +10,7 @@ class Validation extends CI_Model {
 		if(empty($username))
 		{
 			$this->session->sess_destroy();
-			redirect('login');
+			redirect('auth');
 		}
 	}	
 }

@@ -23,30 +23,6 @@
                       <input type="text" class="form-control" name="nama" required autofocus>
                     </div>
                     <div class="form-group">
-                      <label>Jurusan *</label>
-                      <select name="jurusan" id="jurusan_id" class="form-control" required autofocus>
-                        <option value=""> ----- Pilih Jurusan ----- </option>
-                        <?php 
-                          foreach ($jurusan as $row) { ?>
-                          <option <?php echo $jurusan_selected == $row->id ? 'selected="selected"' : '' ?>
-                          value="<?php echo $row->id;?>"><?php echo $row->nama;?></option>
-                          <?php }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Kelas *</label>
-                      <select name="kelas" id="kelas_id" class="form-control" required autofocus>
-                        <option value=""> ----- Pilih Kelas ----- </option>
-                        <?php 
-                          foreach ($kelas as $row) { ?>
-                          <option <?php echo $kelas_selected == $row->jurusan_id ? 'selected="selected"' : '' ?>
-                          class="<?php echo $row->jurusan_id ?>" value="<?php echo $row->id;?>"><?php echo $row->nama;?></option>
-                          <?php }
-                        ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
                       <label>Alamat</label>
                       <textarea class="form-control" name="alamat"></textarea>
                     </div>

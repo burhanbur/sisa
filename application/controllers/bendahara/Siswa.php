@@ -30,8 +30,8 @@ class Siswa extends CI_Controller {
 		$data['kelas']		= $this->crud->getTable('mst_kelas');
 
 		// chained
-		$data['jurusan_selected'] = '';
-		$data['kelas_selected'] = '';
+		// $data['jurusan_selected'] = '';
+		// $data['kelas_selected'] = '';
 
 		$this->load->view('includes/main', $data);
 	}
@@ -51,8 +51,8 @@ class Siswa extends CI_Controller {
 		$data['kelas']		= $this->crud->getTable('mst_kelas');
 
 		// chained
-		$data['jurusan_selected'] = '';
-		$data['kelas_selected'] = '';
+		// $data['jurusan_selected'] = '';
+		// $data['kelas_selected'] = '';
 
 		$this->load->view('includes/main', $data);
 	}
@@ -63,8 +63,8 @@ class Siswa extends CI_Controller {
                 'nomor_induk' => $this->input->post('nis'),
                 'nomor_induk_nasional' => $this->input->post('nisn'),
                 'nama' => $this->input->post('nama'),
-                'kelas_id' => $this->input->post('kelas'),
-                'jurusan_id' => $this->input->post('jurusan'),
+                // 'kelas_id' => $this->input->post('kelas'),
+                // 'jurusan_id' => $this->input->post('jurusan'),
                 'alamat' => $this->input->post('alamat'),
                 'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
@@ -118,8 +118,8 @@ class Siswa extends CI_Controller {
 		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
 		$data['kelas']		= $this->crud->getTable('mst_kelas');
 
-		$data['jurusan_selected'] = '';
-		$data['kelas_selected'] = '';
+		// $data['jurusan_selected'] = '';
+		// $data['kelas_selected'] = '';
 
 		$this->load->view('includes/main', $data);
 	}
@@ -133,8 +133,8 @@ class Siswa extends CI_Controller {
                 'nomor_induk' => $this->input->post('nis'),
                 'nomor_induk_nasional' => $this->input->post('nisn'),
                 'nama' => $this->input->post('nama'),
-                'kelas_id' => $this->input->post('kelas'),
-                'jurusan_id' => $this->input->post('jurusan'),
+                // 'kelas_id' => $this->input->post('kelas'),
+                // 'jurusan_id' => $this->input->post('jurusan'),
                 'alamat' => $this->input->post('alamat'),
                 'tempat_lahir' => $this->input->post('tempat_lahir'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),

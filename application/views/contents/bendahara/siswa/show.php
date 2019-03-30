@@ -15,7 +15,6 @@
                   <th class="center" style="width: 5%">No</th>
                   <th class="center" style="width: 15%">Nomor Induk</th>
                   <th class="center" style="width: 35%">Nama</th>
-                  <th class="center" style="width: 20%">Kelas</th>
                   <th class="center" style="width: 10%">Status</th>
                   <th class="center" style="width: 15%">Aksi</th>
                 </tr>
@@ -28,7 +27,6 @@
                 	<td class="center"><?php echo $no++; ?></td>
                   <td class="center"><?php echo $data->nomor_induk ?></td>
                   <td><?php echo $data->nama ?></td>
-                  <td class="center"><?php echo $data->kelas ?></td>
                   <td class="center"><?php echo $data->status ?></td>
                 	<td class="center">
 		                <a href="<?php echo base_url('bendahara/siswa/detail/'.$data->nomor_induk) ?>" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>

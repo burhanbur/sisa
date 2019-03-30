@@ -23,12 +23,6 @@
                     <b class="col-md-2">Nomor Induk Nasional</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->nomor_induk_nasional; ?>
                 </li>
                 <li class="list-group-item">
-                    <b class="col-md-2">Kelas</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->kelas; ?>
-                </li>
-                <li class="list-group-item">
-                    <b class="col-md-2">Jurusan</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->jurusan; ?>
-                </li>
-                <li class="list-group-item">
                     <b class="col-md-2">Alamat</b><b class="col-md-0">:</b> <?php echo $data->result()[0]->alamat; ?>
                 </li>
                 <li class="list-group-item">
