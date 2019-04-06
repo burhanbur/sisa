@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Siswa extends CI_Controller {
-	var $table = 'mst_siswa';
+	var $table 		= 'mst_siswa';
+	var $judul 		= 'Master';
+	var $sub_judul	= 'Siswa';
 
 	public function __construct() {
 		parent::__construct();
@@ -17,17 +19,17 @@ class Siswa extends CI_Controller {
 	public function index()
 	{
 		$data['content']	= 'contents/bendahara/siswa/show';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Siswa';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_siswa->showSiswa();
 
 		// dropdown data
-		$data['agama']		= $this->crud->getTable('ref_agama');
-		$data['status']		= $this->crud->getTable('ref_status');
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
-		$data['kelas']		= $this->crud->getTable('mst_kelas');
+		$data['agama']		= $this->crud->getTable('ref_agama')->result();
+		$data['status']		= $this->crud->getTable('ref_status')->result();
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
+		$data['kelas']		= $this->crud->getTable('mst_kelas')->result();
 
 		// chained
 		// $data['jurusan_selected'] = '';
@@ -39,16 +41,16 @@ class Siswa extends CI_Controller {
 	public function create()
 	{
 		$data['content']	= 'contents/bendahara/siswa/create';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Siswa';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
 		// dropdown data
-		$data['agama']		= $this->crud->getTable('ref_agama');
-		$data['status']		= $this->crud->getTable('ref_status');
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
-		$data['kelas']		= $this->crud->getTable('mst_kelas');
+		$data['agama']		= $this->crud->getTable('ref_agama')->result();
+		$data['status']		= $this->crud->getTable('ref_status')->result();
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
+		$data['kelas']		= $this->crud->getTable('mst_kelas')->result();
 
 		// chained
 		// $data['jurusan_selected'] = '';
@@ -92,11 +94,15 @@ class Siswa extends CI_Controller {
 		$nis = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/siswa/detail';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Siswa';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_siswa->detailSiswa($nis);
+
+		$idSiswa = $this->db->select('id')->from($this->table)->where('nomor_induk', $nis)->get()->row();
+
+		$data['akademik']	= $this->m_siswa->akademikSiswa($idSiswa->id);
 
 		$this->load->view('includes/main', $data);
 	}
@@ -106,17 +112,17 @@ class Siswa extends CI_Controller {
 		$nis = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/siswa/edit';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Siswa';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_siswa->detailSiswa($nis)->row();
 
 		// dropdown data
-		$data['agama']		= $this->crud->getTable('ref_agama');
-		$data['status']		= $this->crud->getTable('ref_status');
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
-		$data['kelas']		= $this->crud->getTable('mst_kelas');
+		$data['agama']		= $this->crud->getTable('ref_agama')->result();
+		$data['status']		= $this->crud->getTable('ref_status')->result();
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
+		$data['kelas']		= $this->crud->getTable('mst_kelas')->result();
 
 		// $data['jurusan_selected'] = '';
 		// $data['kelas_selected'] = '';

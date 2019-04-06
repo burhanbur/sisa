@@ -8,6 +8,7 @@ class M_guru extends CI_Model {
 		$this->db->select('t.*, rs.nama as status');
 		$this->db->from('mst_guru as t');
 		$this->db->join('ref_status as rs', 't.status_id = rs.id', 'left');
+		$this->db->order_by('t.nip', 'ASC');
 
 		$query = $this->db->get();
 		return $query;

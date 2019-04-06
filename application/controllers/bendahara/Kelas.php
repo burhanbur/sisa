@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kelas extends CI_Controller {
-	var $table = 'mst_kelas';
+	var $table 		= 'mst_kelas';
+	var $tran_kelas	= 'tran_kelas_siswa';
+	var $judul 		= 'Master';
+	var $sub_judul	= 'Kelas';
 
 	public function __construct() {
 		parent::__construct();
@@ -17,13 +20,13 @@ class Kelas extends CI_Controller {
 	public function index()
 	{
 		$data['content']	= 'contents/bendahara/kelas/show';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_kelas->showKelas();
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -31,12 +34,12 @@ class Kelas extends CI_Controller {
 	public function create()
 	{
 		$data['content']	= 'contents/bendahara/kelas/create';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'kelas';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -60,11 +63,18 @@ class Kelas extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/kelas/detail';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_kelas->detailKelas($id);
+
+		$data['siswa']		= $this->m_kelas->siswaKelas($id);
+
+		$data['siswa2']		= $this->crud->getTable('mst_siswa')->result();
+		$data['periode']	= $this->crud->getTable('ref_periode')->result();
+		$data['kelas']		= $this->crud->getTable('mst_kelas')->result();
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -74,13 +84,13 @@ class Kelas extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/kelas/edit';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Kelas';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_kelas->detailkelas($id)->row();
 
-		$data['jurusan']	= $this->crud->getTable('ref_jurusan');
+		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -114,6 +124,36 @@ class Kelas extends CI_Controller {
 			redirect('bendahara/kelas');
 		} else {
 
+		}
+	}
+
+	public function storeSiswa()
+	{
+		$data = array(
+                'siswa_id' => $this->input->post('nama'),
+                'kelas_id' => $this->input->post('kelas'),
+                'periode_id' => $this->input->post('periode')
+            );
+
+		$insert = $this->crud->getInsert($this->tran_kelas, $data);
+
+		$idKelas = $this->db->select('id')->from($this->table)->where('id', $data['kelas_id'])->get()->row();
+		
+		if ($insert) {
+			redirect('bendahara/kelas/detail/'.$idKelas->id);
+		}
+	}
+
+	public function deleteSiswaKelas()
+	{
+		$param = 'id';
+		$paramVal = $this->uri->segment(4);
+		$delete = $this->crud->getDelete($param, $paramVal, $this->tran_kelas);
+
+		if ($delete) {
+			redirect('bendahara/kelas/detail/'.$paramVal);
+		} else {
+			
 		}
 	}
 }

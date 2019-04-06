@@ -25,7 +25,7 @@ class Crud extends CI_Model {
 	}
 
 	public function getTable($table){
-		$data = $this->db->select('*')->from($table)->order_by('id', 'ASC')->get()->result();
+		$data = $this->db->select('*')->from($table)->order_by('id', 'ASC')->get();
 		return $data;
 	}
 }

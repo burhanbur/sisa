@@ -3,6 +3,43 @@
       <div class="row">
         <div class="col-md-12">
 
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="profile-username text-center">Riwayat Kelas Siswa</h3>
+            </div>
+            
+            <div class="box-body">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="center" style="width: 5%">No</th>
+                  <th class="center" style="width: 15%">Nomor Induk</th>
+                  <th class="center" style="width: 30%">Kelas</th>
+                  <th class="center" style="width: 30%">Jurusan</th>
+                  <th class="center" style="width: 10%">Tahun Ajaran</th>
+                  <th class="center" style="width: 10%">Detail</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <?php $no = 1; 
+                foreach ($akademik->result() as $value) {
+                ?> 
+                  <td class="center"><?php echo $no++ ?></td>
+                  <td class="center"><?php echo $value->nomor_induk ?></td>
+                  <td class="center"><?php echo $value->kelas ?></td>
+                  <td class="center"><?php echo $value->jurusan ?></td>
+                  <td class="center"><?php echo $value->tahun_ajaran ?></td>
+                  <td class="center">
+                    <a href="<?php echo base_url('bendahara/kelas/detail/'.$value->kelas_id) ?>" class="btn btn-info btn-xs"><i class="fa fa-eye" ></i></a>
+                  </td>
+                <?php } ?>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
@@ -66,49 +103,15 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-
-          
-          <!-- <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
-            </div>
-            
-            <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-              <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
-              <hr>
-
-              <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-              <p>
-                <span class="label label-danger">UI Design</span>
-                <span class="label label-success">Coding</span>
-                <span class="label label-info">Javascript</span>
-                <span class="label label-warning">PHP</span>
-                <span class="label label-primary">Node.js</span>
-              </p>
-
-              <hr>
-
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-            </div>
-            
-          </div> -->
           
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
     </section>
+
+    <style type="text/css">
+      .center{
+        text-align: center;
+      }
+    </style>

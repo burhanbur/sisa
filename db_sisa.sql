@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Mar 2019 pada 04.32
+-- Generation Time: 06 Apr 2019 pada 20.04
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -30,8 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `mst_anggaran_keluar` (
   `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `pos_pendapatan` int(11) NOT NULL,
+  `ref_anggaran` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `kode_pendapatan` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -90,9 +91,9 @@ INSERT INTO `mst_anggaran_masuk` (`id`, `nama`, `biaya`, `ref_anggaran`, `create
 (32, 'KELAS X', 100000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
 (33, 'KELAS XI', 50000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
 (34, 'KELAS XII', 50000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(35, 'KELAS XII', 200000, 21, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(36, 'KELAS XI', 25000, 22, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(37, 'KELAS XII', 25000, 22, '2019-03-30 03:32:14', '2019-03-30 03:32:14');
+(35, 'KELAS XII', 200000, 19, '2019-03-30 03:32:14', '2019-04-06 09:12:49'),
+(36, 'KELAS XI', 25000, 20, '2019-03-30 03:32:14', '2019-04-06 09:12:29'),
+(37, 'KELAS XII', 25000, 20, '2019-03-30 03:32:14', '2019-04-06 09:12:29');
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,33 @@ CREATE TABLE `mst_guru` (
 --
 
 INSERT INTO `mst_guru` (`id`, `nip`, `nama`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, '216105', 'Septiansah Nur Aziz', 1, '2019-03-23 16:25:18', '2019-03-27 15:34:43');
+(1, '216105', 'Septiansah Nur Aziz', 1, '2019-03-23 16:25:18', '2019-03-27 15:34:43'),
+(2, '216090', 'Luluk Eko Mawati', 1, '2019-04-06 06:17:40', '2019-04-06 06:17:40');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `mst_jurusan`
+--
+
+CREATE TABLE `mst_jurusan` (
+  `id` int(11) NOT NULL,
+  `kode_jurusan` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `mst_jurusan`
+--
+
+INSERT INTO `mst_jurusan` (`id`, `kode_jurusan`, `nama`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, 'DG', 'Desain Grafis', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
+(2, 'PG', 'Produksi Grafika', 1, '2019-03-25 15:28:52', '2019-03-27 16:52:59'),
+(3, 'TKJ', 'Teknik Komputer dan Jaringan', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
+(4, 'MM', 'Multimedia', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32');
 
 -- --------------------------------------------------------
 
@@ -135,7 +162,12 @@ CREATE TABLE `mst_kelas` (
 --
 
 INSERT INTO `mst_kelas` (`id`, `nama`, `jurusan_id`, `created_at`, `updated_at`) VALUES
-(1, 'XII MM-2', 4, '2019-03-23 16:22:47', '2019-03-25 15:34:46');
+(1, 'XII MM-1', 4, '2019-03-23 16:22:47', '2019-04-06 06:32:01'),
+(2, 'X DG-1', 1, '2019-04-06 06:21:33', '2019-04-06 06:21:33'),
+(3, 'XI DG-1', 1, '2019-04-06 06:32:12', '2019-04-06 06:32:56'),
+(4, 'XII DG-1', 1, '2019-04-06 06:32:48', '2019-04-06 06:32:48'),
+(5, 'XI MM-1', 4, '2019-04-06 06:33:11', '2019-04-06 06:33:11'),
+(6, 'X MM-1', 4, '2019-04-06 06:33:23', '2019-04-06 06:33:23');
 
 -- --------------------------------------------------------
 
@@ -221,21 +253,18 @@ INSERT INTO `ref_anggaran_keluar` (`id`, `kode`, `nama`, `created_at`, `updated_
 (3, 'K41', 'Tunjangan Fungsional SMK Grafika Y. Lektur', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (4, 'K3', 'Biaya Honor 4 Satpam + 1 Koordinator', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (5, 'K4', 'Biaya Uang Makan Guru Mengajar Praktik Sore', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(6, 'K6', 'Tunjangan Hari Raya', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(7, 'K6', 'Tenaga Pendidik dan Non Kependidikan', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(8, 'K6', 'Pengawas', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
+(7, 'K6', 'Tunjangan Hari Raya Tenaga Pendidik dan Non Kependidikan', '2019-03-29 16:54:27', '2019-04-06 02:36:50'),
+(8, 'K6', 'Tunjangan Hari Raya Pengawas', '2019-03-29 16:54:27', '2019-04-06 02:36:50'),
 (9, 'K7', 'Honorarium TIM APBS', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (10, 'K9', 'Biaya Praktikum *', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (11, 'K13', 'Biaya ATK (Alat Tulis Kantor) *', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (12, 'K14', 'Biaya Rekening Listrik *', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(13, 'K16', 'Biaya Bahan Bakar Kendaraan Dinas & Transport', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(14, 'K16', 'Mobil Toyota Kijang Inova', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(15, 'K17', 'Motor Honda Revo Absolute', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(16, '', 'Biaya Service Kendaraan Dinas', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(17, 'K18', 'Mobil Toyota Kijang Inova', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(18, 'K19', 'Motor Honda Revo Absolute', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
+(14, 'K16', 'Biaya Bahan Bakar Kendaraan Dinas & Transport Mobil Toyota Kijang Inova', '2019-03-29 16:54:27', '2019-04-06 02:33:26'),
+(15, 'K17', 'Biaya Bahan Bakar Kendaraan Dinas & Transport Motor Honda Revo Absolute', '2019-03-29 16:54:27', '2019-04-06 02:33:37'),
+(17, 'K18', 'Biaya Service Kendaraan Dinas Mobil Toyota Kijang Inova', '2019-03-29 16:54:27', '2019-04-06 02:34:14'),
+(18, 'K19', 'Biaya Service Kendaraan Dinas Motor Honda Revo Absolute', '2019-03-29 16:54:27', '2019-04-06 02:34:14'),
 (19, 'K20', 'Biaya Pajak Kendaraan Dinas Mobil dan Motor ', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
-(20, 'K34', 'Biaya Rapat Raker Tahun 2017/2018', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
+(20, 'K34', 'Biaya Rapat Raker Tahun 2017/2018', '2019-04-06 02:35:47', '2019-04-06 02:35:47'),
 (21, 'K34', 'Biaya Rapat Awal Tahun 2017/2018', '2019-03-29 16:54:27', '2019-03-29 16:54:27'),
 (22, 'K35', 'Biaya Guru Piket', '2019-03-29 16:54:28', '2019-03-29 16:54:28'),
 (23, 'K36', 'Biaya Konsumsi Guru dan Karyawan', '2019-03-29 16:54:28', '2019-03-29 16:54:28'),
@@ -301,7 +330,7 @@ INSERT INTO `ref_anggaran_masuk` (`id`, `kode`, `nama`, `created_at`, `updated_a
 (13, 'D13', 'UANG MOS DAN LDK', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
 (14, 'D14', 'UANG UJI PRAKTEK KEAHLIAN', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
 (15, 'D15', 'UANG KOMITE SEKOLAH', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
-(16, 'D16', 'UANG PENERIMAAN REKENING LISTRIK ATGI', '2019-03-23 16:32:24', '2019-03-30 02:06:56'),
+(16, 'D2', 'UANG PENERIMAAN REKENING LISTRIK ATGI', '2019-03-23 16:32:24', '2019-04-06 06:01:22'),
 (17, 'D17', 'UANG KKS (KLINIK KESEHATAN)', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
 (18, 'D18', 'TES URINE', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
 (19, 'D21', 'PENDALAMAN MATERI', '2019-03-23 16:32:24', '2019-03-23 16:32:24'),
@@ -310,27 +339,33 @@ INSERT INTO `ref_anggaran_masuk` (`id`, `kode`, `nama`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ref_jurusan`
+-- Struktur dari tabel `ref_bulan`
 --
 
-CREATE TABLE `ref_jurusan` (
+CREATE TABLE `ref_bulan` (
   `id` int(11) NOT NULL,
-  `kode_jurusan` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `status_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ref_jurusan`
+-- Dumping data untuk tabel `ref_bulan`
 --
 
-INSERT INTO `ref_jurusan` (`id`, `kode_jurusan`, `nama`, `status_id`, `created_at`, `updated_at`) VALUES
-(1, 'DG', 'Desain Grafis', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
-(2, 'PG', 'Produksi Grafika', 1, '2019-03-25 15:28:52', '2019-03-27 16:52:59'),
-(3, 'TKJ', 'Teknik Komputer dan Jaringan', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32'),
-(4, 'MM', 'Multimedia', 1, '2019-03-25 15:28:52', '2019-03-27 15:56:32');
+INSERT INTO `ref_bulan` (`id`, `nama`, `created_at`, `updated_at`) VALUES
+(1, 'Januari', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(2, 'Februari', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(3, 'Maret', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(4, 'April', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(5, 'Mei', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(6, 'Juni', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(7, 'Juli', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(8, 'Agustus', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(9, 'September', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(10, 'Oktober', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(11, 'November', '2019-04-05 13:58:10', '2019-04-05 13:58:10'),
+(12, 'Desember', '2019-04-05 13:58:10', '2019-04-05 13:58:10');
 
 -- --------------------------------------------------------
 
@@ -341,10 +376,8 @@ INSERT INTO `ref_jurusan` (`id`, `kode_jurusan`, `nama`, `status_id`, `created_a
 CREATE TABLE `ref_periode` (
   `id` int(11) NOT NULL,
   `tahun` varchar(255) NOT NULL,
-  `semester` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status_id` int(11) NOT NULL,
   `tahun_ajaran` varchar(255) NOT NULL,
-  `deskripsi` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -353,8 +386,9 @@ CREATE TABLE `ref_periode` (
 -- Dumping data untuk tabel `ref_periode`
 --
 
-INSERT INTO `ref_periode` (`id`, `tahun`, `semester`, `status`, `tahun_ajaran`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(1, '2018', 1, 1, '2018/2019', 'GANJIL', '2019-03-23 16:19:23', '2019-03-25 15:32:48');
+INSERT INTO `ref_periode` (`id`, `tahun`, `status_id`, `tahun_ajaran`, `created_at`, `updated_at`) VALUES
+(1, '2018', 1, '2018/2019', '2019-03-23 16:19:23', '2019-04-06 17:27:11'),
+(4, '2019', 0, '2019/2020', '2019-04-06 04:14:37', '2019-04-06 17:27:11');
 
 -- --------------------------------------------------------
 
@@ -395,21 +429,58 @@ CREATE TABLE `ref_status` (
 --
 
 INSERT INTO `ref_status` (`id`, `nama`, `created_at`, `updated_at`) VALUES
+(0, 'NON-AKTIF', '2019-03-24 17:09:09', '2019-04-06 04:15:41'),
 (1, 'AKTIF', '2019-03-24 17:09:09', '2019-03-25 15:33:03'),
-(2, 'NON-AKTIF', '2019-03-24 17:09:09', '2019-03-25 15:33:03');
+(3, 'LULUS', '2019-04-06 05:34:34', '2019-04-06 05:34:34');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tran_kelas`
+-- Struktur dari tabel `tran_belom_jelas`
 --
 
-CREATE TABLE `tran_kelas` (
+CREATE TABLE `tran_belom_jelas` (
+  `id` int(11) NOT NULL,
+  `siswa_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tran_kelas_siswa`
+--
+
+CREATE TABLE `tran_kelas_siswa` (
   `id` int(11) NOT NULL,
   `kelas_id` int(11) NOT NULL,
   `siswa_id` int(11) NOT NULL,
   `periode_id` int(11) NOT NULL,
-  `jurusan_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tran_kelas_siswa`
+--
+
+INSERT INTO `tran_kelas_siswa` (`id`, `kelas_id`, `siswa_id`, `periode_id`, `created_at`, `updated_at`) VALUES
+(3, 2, 1, 1, '2019-04-06 18:02:24', '2019-04-06 18:02:24');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tran_pendapatan`
+--
+
+CREATE TABLE `tran_pendapatan` (
+  `id` int(11) NOT NULL,
+  `siswa_id` int(11) NOT NULL,
+  `bulan_id` int(11) NOT NULL,
+  `periode_id` int(11) NOT NULL,
+  `anggaran_masuk_id` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -436,7 +507,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role_id`, `created_at`, `updated_at`, `login_terakhir`) VALUES
-(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-03-28 10:34:24');
+(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-04-06 09:50:25');
 
 --
 -- Indexes for dumped tables
@@ -461,6 +532,12 @@ ALTER TABLE `mst_guru`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mst_jurusan`
+--
+ALTER TABLE `mst_jurusan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mst_kelas`
 --
 ALTER TABLE `mst_kelas`
@@ -470,7 +547,9 @@ ALTER TABLE `mst_kelas`
 -- Indexes for table `mst_siswa`
 --
 ALTER TABLE `mst_siswa`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nomor_induk` (`nomor_induk`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `ref_agama`
@@ -491,9 +570,9 @@ ALTER TABLE `ref_anggaran_masuk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ref_jurusan`
+-- Indexes for table `ref_bulan`
 --
-ALTER TABLE `ref_jurusan`
+ALTER TABLE `ref_bulan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -515,9 +594,21 @@ ALTER TABLE `ref_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tran_kelas`
+-- Indexes for table `tran_belom_jelas`
 --
-ALTER TABLE `tran_kelas`
+ALTER TABLE `tran_belom_jelas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tran_kelas_siswa`
+--
+ALTER TABLE `tran_kelas_siswa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tran_pendapatan`
+--
+ALTER TABLE `tran_pendapatan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -547,13 +638,19 @@ ALTER TABLE `mst_anggaran_masuk`
 -- AUTO_INCREMENT for table `mst_guru`
 --
 ALTER TABLE `mst_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `mst_jurusan`
+--
+ALTER TABLE `mst_jurusan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `mst_kelas`
 --
 ALTER TABLE `mst_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `mst_siswa`
@@ -565,7 +662,7 @@ ALTER TABLE `mst_siswa`
 -- AUTO_INCREMENT for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ref_anggaran_keluar`
@@ -577,36 +674,48 @@ ALTER TABLE `ref_anggaran_keluar`
 -- AUTO_INCREMENT for table `ref_anggaran_masuk`
 --
 ALTER TABLE `ref_anggaran_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `ref_jurusan`
+-- AUTO_INCREMENT for table `ref_bulan`
 --
-ALTER TABLE `ref_jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `ref_bulan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ref_periode`
 --
 ALTER TABLE `ref_periode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ref_role`
 --
 ALTER TABLE `ref_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ref_status`
 --
 ALTER TABLE `ref_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tran_kelas`
+-- AUTO_INCREMENT for table `tran_belom_jelas`
 --
-ALTER TABLE `tran_kelas`
+ALTER TABLE `tran_belom_jelas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tran_kelas_siswa`
+--
+ALTER TABLE `tran_kelas_siswa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tran_pendapatan`
+--
+ALTER TABLE `tran_pendapatan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

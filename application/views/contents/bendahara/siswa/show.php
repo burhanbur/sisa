@@ -14,7 +14,7 @@
                 <tr>
                   <th class="center" style="width: 5%">No</th>
                   <th class="center" style="width: 15%">Nomor Induk</th>
-                  <th class="center" style="width: 35%">Nama</th>
+                  <th class="center" style="width: 30%">Nama</th>
                   <th class="center" style="width: 10%">Status</th>
                   <th class="center" style="width: 15%">Aksi</th>
                 </tr>

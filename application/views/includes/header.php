@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="<?php echo base_url(); ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>LTE</b></span>
+      <span class="logo-mini"><b>SISA</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>SISA</b></span>
+      <span class="logo-lg"><b>SISA SMK GRAFIKA</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -15,46 +15,41 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="glyphicon glyphicon-education"></span> &nbsp;
+              <?php 
+                $query = $this->db->select('*')->from('ref_periode')->where('status_id', 1)->get()->row();
+                echo '<b>TAHUN AJARAN: '.$query->tahun_ajaran.'</b>';
+              ?>&nbsp;              
+              <span class="glyphicon glyphicon-menu-down"></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
+              <li class="header">
+                <p style="text-align: center;">Tahun Ajaran:</p>
+
+                <form role="form" action="<?php echo base_url('bendahara/periode/periodeAktif'); ?>" method="POST">
+                  <div class="box-body">                    
+                     <div class="form-group">
+                        <select name="id" class="form-control" required autofocus>
+                          <?php
+                            $periode   = $this->crud->getTable('ref_periode')->result();
+                            foreach ($periode as $row) { ?>
+                            <option <?php if($query->id == $row->id){echo "selected";} ?> value="<?php echo $row->id;?>"><?php echo $row->tahun_ajaran ?></option>
+                            <?php }
+                          ?>
+                          </select>
+                      </div>
+                  </div>
+                  <!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <div class="pull-right">
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                 </div>
+                </form>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
 

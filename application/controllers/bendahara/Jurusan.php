@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jurusan extends CI_Controller {
-	var $table = 'ref_jurusan';
+	var $table 		= 'mst_jurusan';
+	var $judul 		= 'Master';
+	var $sub_judul	= 'Jurusan';
 
 	public function __construct() {
 		parent::__construct();
@@ -17,8 +19,8 @@ class Jurusan extends CI_Controller {
 	public function index()
 	{
 		$data['content']	= 'contents/bendahara/jurusan/show';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Jurusan';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_jurusan->showJurusan();
@@ -29,8 +31,8 @@ class Jurusan extends CI_Controller {
 	public function create()
 	{
 		$data['content']	= 'contents/bendahara/jurusan/create';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Jurusan';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
@@ -57,8 +59,8 @@ class Jurusan extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/jurusan/detail';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Jurusan';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_jurusan->detailjurusan($id);
@@ -71,8 +73,8 @@ class Jurusan extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/jurusan/edit';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Jurusan';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_jurusan->detailjurusan($id)->row();

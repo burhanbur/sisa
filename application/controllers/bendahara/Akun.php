@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Akun extends CI_Controller {
-	var $table = 'users';
+	var $table 		= 'users';
+	var $judul 		= 'Master';
+	var $sub_judul	= 'Akun';
 
 	public function __construct() {
 		parent::__construct();
@@ -17,13 +19,13 @@ class Akun extends CI_Controller {
 	public function index()
 	{
 		$data['content']	= 'contents/bendahara/akun/show';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Akun';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_login->showAkun();
 
-		$data['roles']		= $this->crud->getTable('ref_role');
+		$data['roles']		= $this->crud->getTable('ref_role')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -31,12 +33,12 @@ class Akun extends CI_Controller {
 	public function create()
 	{
 		$data['content']	= 'contents/bendahara/akun/create';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Akun';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
-		$data['roles']		= $this->crud->getTable('ref_role');
+		$data['roles']		= $this->crud->getTable('ref_role')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -62,8 +64,8 @@ class Akun extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/akun/detail';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Akun';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_login->detailAkun($id);
@@ -76,13 +78,13 @@ class Akun extends CI_Controller {
 		$id = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/akun/edit';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'akun';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_login->detailAkun($id)->row();
 
-		$data['roles']		= $this->crud->getTable('ref_role');
+		$data['roles']		= $this->crud->getTable('ref_role')->result();
 
 		$this->load->view('includes/main', $data);
 	}

@@ -31,15 +31,15 @@
           <a href="<?php echo base_url() ?>"><i class="fa fa-home"></i> <span>Beranda</span></a>
         </li>
 
-        <?php 
-        $arrUri = array();
-        array_push($arrUri, $uri);
-        $menu = array('siswa', 'guru', 'kelas', 'jurusan', 'anggaranpendapatan', 'anggaranpengeluaran');
+        <?php if ($role == 2) { 
 
-        if ($role == 2) { ?>
-          <li class="<?php foreach ($arrUri as $arr) if (in_array($arr, $menu)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+          $masterUri = array();
+          array_push($masterUri, $uri);
+          $menuMaster = array('siswa', 'guru', 'kelas', 'jurusan', 'anggaranpendapatan', 'anggaranpengeluaran');
+        ?>
+          <li class="<?php foreach ($masterUri as $master) if (in_array($master, $menuMaster)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
             <a href="#">
-              <i class="fa fa-book"></i>
+              <i class="fa fa-database"></i>
               <span>Data Master</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -68,12 +68,86 @@
               </ul>
             </li>
             </ul>
+          </li>          
+
+          <?php 
+          $transaksi = array();
+          array_push($transaksi, $uri);
+          $menuTransaksi = array('kelas_siswa', 'tes');
+          ?>
+          <li class="<?php foreach ($transaksi as $tran) if (in_array($tran, $menuTransaksi)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+            <a href="#">
+              <i class="fa fa-sheqel"></i>
+              <span>Data Transaksi</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <!-- <li class="<?php if ($uri == 'akun') echo 'active' ?>"><a href="<?php echo base_url('bendahara/akun'); ?>"><i class="fa fa-circle-o"></i> Akun </a></li> -->
+            </ul>
+          </li>
+
+          <?php 
+          $laporan = array();
+          array_push($laporan, $uri);
+          $menuLaporan = array('tes', 'tes');
+          ?>
+          <li class="<?php foreach ($laporan as $report) if (in_array($report, $menuLaporan)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+            <a href="#">
+              <i class="fa fa-book"></i>
+              <span>Data Laporan</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <!-- <ul class="treeview-menu">
+              <li class="<?php if ($uri == 'akun') echo 'active' ?>"><a href="<?php echo base_url('bendahara/akun'); ?>"><i class="fa fa-circle-o"></i> Akun </a></li>
+            </ul> -->
+          </li>
+
+          <?php
+            $refUri = array();
+            array_push($refUri, $uri);
+            $menuRef = array('ref_status', 'ref_role', 'ref_agama', 'ref_bulan', 'ref_pendapatan', 'ref_pengeluaran', 'periode');
+          ?>
+          <li class="<?php foreach ($refUri as $ref) if (in_array($ref, $menuRef)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+            <a href="#">
+              <i class="fa fa-folder"></i>
+              <span>Data Referensi</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="<?php if ($uri == 'ref_role') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_role'); ?>"><i class="fa fa-circle-o"></i> Peran </a></li>
+              <li class="<?php if ($uri == 'ref_status') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_status'); ?>"><i class="fa fa-circle-o"></i> Status </a></li>
+              <li class="<?php if ($uri == 'ref_agama') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_agama'); ?>"><i class="fa fa-circle-o"></i> Agama </a></li>
+              <li class="<?php if ($uri == 'periode') echo 'active' ?>"><a href="<?php echo base_url('bendahara/periode'); ?>"><i class="fa fa-circle-o"></i> Periode </a></li>
+
+              <?php 
+              $subUri = array();
+              array_push($subUri, $uri);
+              $subMenu = array('ref_pendapatan', 'ref_pengeluaran');
+              ?>
+              <li class="<?php foreach ($subUri as $subArr) if (in_array($subArr, $subMenu)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
+              <a href="#"><i class="fa fa-circle-o"></i> Anggaran
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php if ($uri == 'anggaranpendapatan') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_pendapatan'); ?>"><i class="fa fa-circle-o"></i> Pendapatan </a></li>
+                <li class="<?php if ($uri == 'anggaranpengeluaran') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_pengeluaran'); ?>"><i class="fa fa-circle-o"></i> Pengeluaran </a></li>
+              </ul>
+            </li>
+            </ul>
           </li>
 
           <?php 
           $settings = array();
           array_push($settings, $uri);
-          $menuSetting = array('akun', 'periode');
+          $menuSetting = array('akun');
           ?>
           <li class="<?php foreach ($settings as $setting) if (in_array($setting, $menuSetting)) echo 'treeview active menu-open'; else echo 'treeview'; ?>">
             <a href="#">
@@ -85,7 +159,6 @@
             </a>
             <ul class="treeview-menu">
               <li class="<?php if ($uri == 'akun') echo 'active' ?>"><a href="<?php echo base_url('bendahara/akun'); ?>"><i class="fa fa-circle-o"></i> Akun </a></li>
-              <li class="<?php if ($uri == 'periode') echo 'active' ?>"><a href="<?php echo base_url('bendahara/periode'); ?>"><i class="fa fa-circle-o"></i> Periode </a></li>
             </ul>
           </li>
         <?php } else { ?>

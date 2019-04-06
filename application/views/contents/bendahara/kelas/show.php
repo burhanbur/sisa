@@ -1,4 +1,4 @@
-		<a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah kelas</a>
+		<a class="btn btn-success" data-toggle="modal" data-target="#modal-default" href=""><i class="fa fa-user-plus"></i>&nbsp;Tambah Kelas</a>
 
       <?php $this->load->view('contents/bendahara/kelas/createModal'); ?>
     <!-- <a class="btn btn-success" href="<?php //echo base_url('bendahara/kelas/create'); ?>"><i class="fa fa-user-plus"></i>&nbsp;Tambah kelas</a> -->

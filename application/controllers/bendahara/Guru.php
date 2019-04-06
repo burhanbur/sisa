@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Guru extends CI_Controller {
-	var $table = 'mst_guru';
+	var $table 		= 'mst_guru';
+	var $judul 		= 'Master';
+	var $sub_judul	= 'Guru';
 
 	public function __construct() {
 		parent::__construct();
@@ -17,8 +19,8 @@ class Guru extends CI_Controller {
 	public function index()
 	{
 		$data['content']	= 'contents/bendahara/guru/show';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Guru';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_guru->showGuru();
@@ -29,8 +31,8 @@ class Guru extends CI_Controller {
 	public function create()
 	{
 		$data['content']	= 'contents/bendahara/guru/create';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Guru';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
@@ -57,8 +59,8 @@ class Guru extends CI_Controller {
 		$nip = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/guru/detail';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Guru';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_guru->detailGuru($nip);
@@ -71,8 +73,8 @@ class Guru extends CI_Controller {
 		$nip = $this->uri->segment(4);
 
 		$data['content']	= 'contents/bendahara/guru/edit';
-		$data['judul']		= 'Master';
-		$data['sub_judul']	= 'Guru';
+		$data['judul']		= $this->judul;
+		$data['sub_judul']	= $this->sub_judul;
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_guru->detailGuru($nip)->row();
