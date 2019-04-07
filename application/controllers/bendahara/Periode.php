@@ -140,7 +140,7 @@ class periode extends CI_Controller {
 	        $update = $this->crud->getUpdate($param, $paramVal, $this->table, $data);
 
 	        if ($update) {
-				echo "<script>history.go(-1);</script>";
+				redirect($_SERVER['HTTP_REFERER']);
 			}
 		}        
 	}

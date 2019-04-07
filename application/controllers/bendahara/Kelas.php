@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Kelas extends CI_Controller {
-	var $table 		= 'mst_kelas';
-	var $tran_kelas	= 'tran_kelas_siswa';
-	var $judul 		= 'Master';
-	var $sub_judul	= 'Kelas';
+	var $table 				= 'mst_kelas';
+	var $tran_kelas_siswa	= 'tran_kelas_siswa';
+	var $judul 				= 'Master';
+	var $sub_judul			= 'Kelas';
 
 	public function __construct() {
 		parent::__construct();
@@ -27,6 +27,7 @@ class Kelas extends CI_Controller {
 		$data['data']		= $this->m_kelas->showKelas();
 
 		$data['jurusan']	= $this->crud->getTable('mst_jurusan')->result();
+		$data['periode']	= $this->crud->getTable('ref_periode')->result();
 
 		$this->load->view('includes/main', $data);
 	}
@@ -48,7 +49,9 @@ class Kelas extends CI_Controller {
 	{
 		$data = array(
                 'nama' => $this->input->post('nama'),
-                'jurusan_id' => $this->input->post('jurusan')
+                'jurusan_id' => $this->input->post('jurusan'),
+                'tingkat' => $this->input->post('tingkat'),
+                'periode_id' => $this->input->post('periode')
             );
 
 		$insert = $this->crud->getInsert($this->table, $data);
@@ -69,6 +72,7 @@ class Kelas extends CI_Controller {
 		$data['role']		= $this->session->userdata('role');
 		$data['data']		= $this->m_kelas->detailKelas($id);
 
+		// siswa
 		$data['siswa']		= $this->m_kelas->siswaKelas($id);
 
 		$data['siswa2']		= $this->crud->getTable('mst_siswa')->result();
@@ -118,16 +122,21 @@ class Kelas extends CI_Controller {
 	{
 		$param = 'id';
 		$paramVal = $this->uri->segment(4);
-		$delete = $this->crud->getDelete($param, $paramVal, $this->table);
 
-		if ($delete) {
-			redirect('bendahara/kelas');
+		$cekSiswa = $this->db->select('id')->from($this->tran_kelas_siswa)->where(array('kelas_id' => $paramVal))->get()->row();
+
+		if (!$cekSiswa->id) {
+			$delete = $this->crud->getDelete($param, $paramVal, $this->table);
+
+			if ($delete) {
+				redirect('bendahara/kelas');
+			}
 		} else {
-
-		}
+			echo "<script>alert('Tidak dapat menghapus kelas, karena ada siswa terdaftar!');history.go(-1);</script>";
+		}		
 	}
 
-	public function storeSiswa()
+	public function storeSiswaKelas()
 	{
 		$data = array(
                 'siswa_id' => $this->input->post('nama'),
@@ -135,12 +144,21 @@ class Kelas extends CI_Controller {
                 'periode_id' => $this->input->post('periode')
             );
 
-		$insert = $this->crud->getInsert($this->tran_kelas, $data);
+		// mengecek data siswa apakah telah terdaftar dikelas lain
+		$cekSiswa = $this->db->select('id')->from($this->tran_kelas_siswa)->where(array('siswa_id' => $data['siswa_id'], 'periode_id' => $data['periode_id']))->get()->row();
 
-		$idKelas = $this->db->select('id')->from($this->table)->where('id', $data['kelas_id'])->get()->row();
-		
-		if ($insert) {
-			redirect('bendahara/kelas/detail/'.$idKelas->id);
+		if(!$cekSiswa->id){
+			$insert = $this->crud->getInsert($this->tran_kelas_siswa, $data);	
+			// menghitung jumlah siswa dalam kelas
+			$jumlahSiswa = $this->crud->getJumlahSiswa($data['kelas_id'], $data['periode_id'])->row();
+			// mengupdate jumlah siswa setiap ada perubahan
+			$updateJumlah = $this->db->where('id', $data['kelas_id'])->update($this->table, array('jumlah' => $jumlahSiswa->jumlah));
+			
+			if ($insert) {
+				redirect($_SERVER['HTTP_REFERER']);
+			}
+		} else {
+			echo "<script>alert('Siswa ini telah terdaftar dalam kelas!');history.go(-1);</script>";
 		}
 	}
 
@@ -148,12 +166,17 @@ class Kelas extends CI_Controller {
 	{
 		$param = 'id';
 		$paramVal = $this->uri->segment(4);
-		$delete = $this->crud->getDelete($param, $paramVal, $this->tran_kelas);
+		$delete = $this->crud->getDelete($param, $paramVal, $this->tran_kelas_siswa);
+
+		// mendapatkan periode berdasarkan id_kelas_siswa
+		$idPeriode = $this->db->select('periode_id')->from($this->tran_kelas_siswa)->where('id', $paramVal)->get()->row();
+		// menghitung jumlah siswa dalam kelas
+		$jumlahSiswa = $this->crud->getJumlahSiswa($idKelas, $idPeriode->periode_id)->row();
+		// mengupdate jumlah siswa setiap ada perubahan
+		$updateJumlah = $this->db->where('id', $idKelas)->update($this->table, array('jumlah' => $jumlahSiswa->jumlah));
 
 		if ($delete) {
-			redirect('bendahara/kelas/detail/'.$paramVal);
-		} else {
-			
+			redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
 }

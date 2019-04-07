@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06 Apr 2019 pada 20.04
+-- Generation Time: 07 Apr 2019 pada 17.42
 -- Versi Server: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -48,6 +48,8 @@ CREATE TABLE `mst_anggaran_masuk` (
   `nama` varchar(255) NOT NULL,
   `biaya` int(11) NOT NULL,
   `ref_anggaran` int(11) NOT NULL,
+  `periode_id` int(11) NOT NULL,
+  `tingkat` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -56,44 +58,44 @@ CREATE TABLE `mst_anggaran_masuk` (
 -- Dumping data untuk tabel `mst_anggaran_masuk`
 --
 
-INSERT INTO `mst_anggaran_masuk` (`id`, `nama`, `biaya`, `ref_anggaran`, `created_at`, `updated_at`) VALUES
-(1, 'KELAS X', 382500, 1, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(2, 'KELAS XI', 330000, 1, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(3, 'KELAS XII', 335000, 1, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(4, 'KELAS X', 1000000, 2, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(5, 'KELAS XI', 1000000, 2, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(6, 'KELAS XII', 1000000, 2, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(7, 'KELAS X', 2500000, 3, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(8, 'KELAS X', 15000, 4, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(9, 'KELAS XI', 20000, 4, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(10, 'KELAS XII', 20000, 4, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(11, 'KELAS X', 15000, 5, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(12, 'KELAS XI', 30000, 5, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(13, 'KELAS XII', 30000, 5, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(14, 'KELAS XII', 50000, 6, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(15, 'KELAS XII', 55000, 7, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(16, 'KELAS XII', 45000, 8, '2019-03-30 03:32:13', '2019-03-30 03:32:13'),
-(17, 'KELAS X', 1200000, 9, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(18, 'KELAS XI', 45000, 10, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(19, 'KELAS X', 100000, 11, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(20, 'KELAS X', 200000, 12, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(21, 'KELAS XII', 1050000, 12, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(22, 'KELAS X', 150000, 13, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(23, 'KELAS X', 7500, 14, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(24, 'KELAS XI', 20000, 14, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(25, 'KELAS X', 5000, 15, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(26, 'KELAS XI', 5000, 15, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(27, 'KELAS XII', 5000, 15, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(28, 'UANG PENERIMAAN REKENING LITRIK ATGI', 1600000, 16, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(29, 'KELAS X', 12500, 17, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(30, 'KELAS XI', 12500, 17, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(31, 'KELAS XII', 40000, 17, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(32, 'KELAS X', 100000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(33, 'KELAS XI', 50000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(34, 'KELAS XII', 50000, 18, '2019-03-30 03:32:14', '2019-03-30 03:32:14'),
-(35, 'KELAS XII', 200000, 19, '2019-03-30 03:32:14', '2019-04-06 09:12:49'),
-(36, 'KELAS XI', 25000, 20, '2019-03-30 03:32:14', '2019-04-06 09:12:29'),
-(37, 'KELAS XII', 25000, 20, '2019-03-30 03:32:14', '2019-04-06 09:12:29');
+INSERT INTO `mst_anggaran_masuk` (`id`, `nama`, `biaya`, `ref_anggaran`, `periode_id`, `tingkat`, `created_at`, `updated_at`) VALUES
+(1, 'KELAS X', 382500, 1, 1, 10, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(2, 'KELAS XI', 330000, 1, 1, 11, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(3, 'KELAS XII', 335000, 1, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(4, 'KELAS X', 1000000, 2, 1, 10, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(5, 'KELAS XI', 1000000, 2, 1, 11, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(6, 'KELAS XII', 1000000, 2, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(7, 'KELAS X', 2500000, 3, 1, 10, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(8, 'KELAS X', 15000, 4, 1, 10, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(9, 'KELAS XI', 20000, 4, 1, 11, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(10, 'KELAS XII', 20000, 4, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(11, 'KELAS X', 15000, 5, 1, 10, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(12, 'KELAS XI', 30000, 5, 1, 11, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(13, 'KELAS XII', 30000, 5, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(14, 'KELAS XII', 50000, 6, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(15, 'KELAS XII', 55000, 7, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(16, 'KELAS XII', 45000, 8, 1, 12, '2019-03-30 03:32:13', '2019-04-07 06:53:16'),
+(17, 'KELAS X', 1200000, 9, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(18, 'KELAS XI', 45000, 10, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(19, 'KELAS X', 100000, 11, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(20, 'KELAS X', 200000, 12, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(21, 'KELAS XII', 1050000, 12, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(22, 'KELAS X', 150000, 13, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(23, 'KELAS X', 7500, 14, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(24, 'KELAS XI', 20000, 14, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(25, 'KELAS X', 5000, 15, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(26, 'KELAS XI', 5000, 15, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(27, 'KELAS XII', 5000, 15, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(28, 'UANG PENERIMAAN REKENING LITRIK ATGI', 1600000, 16, 1, 0, '2019-03-30 03:32:14', '2019-04-07 05:52:39'),
+(29, 'KELAS X', 12500, 17, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(30, 'KELAS XI', 12500, 17, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(31, 'KELAS XII', 40000, 17, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(32, 'KELAS X', 100000, 18, 1, 10, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(33, 'KELAS XI', 50000, 18, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(34, 'KELAS XII', 50000, 18, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(35, 'KELAS XII', 200000, 19, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(36, 'KELAS XI', 25000, 20, 1, 11, '2019-03-30 03:32:14', '2019-04-07 06:53:16'),
+(37, 'KELAS XII', 25000, 20, 1, 12, '2019-03-30 03:32:14', '2019-04-07 06:53:16');
 
 -- --------------------------------------------------------
 
@@ -153,6 +155,9 @@ CREATE TABLE `mst_kelas` (
   `id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jurusan_id` int(11) NOT NULL,
+  `tingkat` varchar(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `periode_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -161,13 +166,13 @@ CREATE TABLE `mst_kelas` (
 -- Dumping data untuk tabel `mst_kelas`
 --
 
-INSERT INTO `mst_kelas` (`id`, `nama`, `jurusan_id`, `created_at`, `updated_at`) VALUES
-(1, 'XII MM-1', 4, '2019-03-23 16:22:47', '2019-04-06 06:32:01'),
-(2, 'X DG-1', 1, '2019-04-06 06:21:33', '2019-04-06 06:21:33'),
-(3, 'XI DG-1', 1, '2019-04-06 06:32:12', '2019-04-06 06:32:56'),
-(4, 'XII DG-1', 1, '2019-04-06 06:32:48', '2019-04-06 06:32:48'),
-(5, 'XI MM-1', 4, '2019-04-06 06:33:11', '2019-04-06 06:33:11'),
-(6, 'X MM-1', 4, '2019-04-06 06:33:23', '2019-04-06 06:33:23');
+INSERT INTO `mst_kelas` (`id`, `nama`, `jurusan_id`, `tingkat`, `jumlah`, `periode_id`, `created_at`, `updated_at`) VALUES
+(1, 'XII MM-1', 4, '12', 3, 1, '2019-03-23 16:22:47', '2019-04-07 15:18:19'),
+(2, 'X DG-1', 1, '10', 0, 1, '2019-04-06 06:21:33', '2019-04-07 13:42:50'),
+(3, 'XI DG-1', 1, '11', 0, 1, '2019-04-06 06:32:12', '2019-04-07 13:42:50'),
+(4, 'XII DG-1', 1, '12', 0, 1, '2019-04-06 06:32:48', '2019-04-07 13:42:50'),
+(5, 'XI MM-1', 4, '11', 0, 1, '2019-04-06 06:33:11', '2019-04-07 13:42:50'),
+(6, 'X MM-1', 4, '10', 0, 1, '2019-04-06 06:33:23', '2019-04-07 13:42:50');
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,9 @@ CREATE TABLE `mst_siswa` (
 --
 
 INSERT INTO `mst_siswa` (`id`, `nomor_induk`, `nomor_induk_nasional`, `nama`, `alamat`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama_id`, `no_hp`, `email`, `asal_sekolah`, `tahun_masuk`, `status_id`, `nama_ayah`, `nama_ibu`, `foto`, `created_at`, `updated_at`) VALUES
-(1, '92317077', '', 'Burhan Mafazi', 'Jl. Ngarai No. 5 Kelapa Dua Cimanggis Depok', 'JAKARTA', '1995-05-16', 'Laki-Laki', 1, '085695682973', 'burhanmafazi@gmail.com', 'SMP N 102 JAKARTA', '2018', 1, '', '', '', '2019-03-23 16:23:49', '2019-03-25 15:32:31');
+(1, '92317077', '', 'Burhan Mafazi', 'Jl. Ngarai No. 5 Kelapa Dua Cimanggis Depok', 'JAKARTA', '1995-05-16', 'Laki-Laki', 1, '085695682973', 'burhanmafazi@gmail.com', 'SMP N 102 JAKARTA', '2018', 1, '', '', '', '2019-03-23 16:23:49', '2019-03-25 15:32:31'),
+(2, '92317076', '', 'Faisal Akbar', 'Bogor', 'Bogor', '1995-05-16', 'Laki-Laki', 1, '085695682973', 'faisalakbar@gmail.com', '', '2018', 1, '', 'Tida Tau', NULL, '2019-04-07 14:52:10', '2019-04-07 14:52:10'),
+(3, '92317053', '', 'Fathurahman Arief', 'Lenteng Agung', 'JAKARTA', '2019-04-07', 'Laki-Laki', 1, '085695682973', 'fathurahmanarief@gmail.com', '', '2018', 1, '', 'Tida Tau', NULL, '2019-04-07 15:09:57', '2019-04-07 15:13:07');
 
 -- --------------------------------------------------------
 
@@ -387,8 +394,8 @@ CREATE TABLE `ref_periode` (
 --
 
 INSERT INTO `ref_periode` (`id`, `tahun`, `status_id`, `tahun_ajaran`, `created_at`, `updated_at`) VALUES
-(1, '2018', 1, '2018/2019', '2019-03-23 16:19:23', '2019-04-06 17:27:11'),
-(4, '2019', 0, '2019/2020', '2019-04-06 04:14:37', '2019-04-06 17:27:11');
+(1, '2018', 1, '2018/2019', '2019-03-23 16:19:23', '2019-04-07 15:25:55'),
+(4, '2019', 0, '2019/2020', '2019-04-06 04:14:37', '2019-04-07 15:25:55');
 
 -- --------------------------------------------------------
 
@@ -441,6 +448,8 @@ INSERT INTO `ref_status` (`id`, `nama`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `tran_belom_jelas` (
   `id` int(11) NOT NULL,
+  `id_mst_anggaran` int(11) NOT NULL,
+  `dibayar` int(11) NOT NULL,
   `siswa_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -466,7 +475,9 @@ CREATE TABLE `tran_kelas_siswa` (
 --
 
 INSERT INTO `tran_kelas_siswa` (`id`, `kelas_id`, `siswa_id`, `periode_id`, `created_at`, `updated_at`) VALUES
-(3, 2, 1, 1, '2019-04-06 18:02:24', '2019-04-06 18:02:24');
+(20, 1, 1, 1, '2019-04-07 14:33:25', '2019-04-07 14:33:25'),
+(21, 1, 2, 1, '2019-04-07 14:52:38', '2019-04-07 14:52:38'),
+(22, 1, 3, 1, '2019-04-07 15:18:19', '2019-04-07 15:18:19');
 
 -- --------------------------------------------------------
 
@@ -477,10 +488,8 @@ INSERT INTO `tran_kelas_siswa` (`id`, `kelas_id`, `siswa_id`, `periode_id`, `cre
 CREATE TABLE `tran_pendapatan` (
   `id` int(11) NOT NULL,
   `siswa_id` int(11) NOT NULL,
-  `bulan_id` int(11) NOT NULL,
-  `periode_id` int(11) NOT NULL,
   `anggaran_masuk_id` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `dibayar` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -507,7 +516,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `role_id`, `created_at`, `updated_at`, `login_terakhir`) VALUES
-(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-04-06 09:50:25');
+(1, 'Burhan Mafazi', 'bmafazi', '827ccb0eea8a706c4c34a16891f84e7b', 2, '2019-03-23 15:52:43', '2019-03-23 15:52:04', '2019-04-07 10:41:44');
 
 --
 -- Indexes for dumped tables
@@ -632,7 +641,7 @@ ALTER TABLE `mst_anggaran_keluar`
 -- AUTO_INCREMENT for table `mst_anggaran_masuk`
 --
 ALTER TABLE `mst_anggaran_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `mst_guru`
@@ -650,19 +659,19 @@ ALTER TABLE `mst_jurusan`
 -- AUTO_INCREMENT for table `mst_kelas`
 --
 ALTER TABLE `mst_kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `mst_siswa`
 --
 ALTER TABLE `mst_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ref_agama`
 --
 ALTER TABLE `ref_agama`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ref_anggaran_keluar`
@@ -674,7 +683,7 @@ ALTER TABLE `ref_anggaran_keluar`
 -- AUTO_INCREMENT for table `ref_anggaran_masuk`
 --
 ALTER TABLE `ref_anggaran_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `ref_bulan`
@@ -692,7 +701,7 @@ ALTER TABLE `ref_periode`
 -- AUTO_INCREMENT for table `ref_role`
 --
 ALTER TABLE `ref_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ref_status`
@@ -710,7 +719,7 @@ ALTER TABLE `tran_belom_jelas`
 -- AUTO_INCREMENT for table `tran_kelas_siswa`
 --
 ALTER TABLE `tran_kelas_siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tran_pendapatan`

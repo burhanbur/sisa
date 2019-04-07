@@ -28,4 +28,40 @@ class Crud extends CI_Model {
 		$data = $this->db->select('*')->from($table)->order_by('id', 'ASC')->get();
 		return $data;
 	}
+
+	public function count($table, $param = NULL, $paramVal = NULL)
+	{
+		if (!$param && !$paramVal) {
+			$sql = "SELECT COUNT(id) AS jumlah FROM '$table'";
+		} else {
+			$sql = "SELECT COUNT(id) AS jumlah FROM $table WHERE $param = '$paramVal'";
+		}
+
+		$query = $this->db->query($sql)->row()->jumlah;
+		return $query;
+	}
+
+	public function getJumlahBiayaKategori($periode_id, $ref_anggaran)
+	{
+		$sql = "SELECT SUM(biaya) AS biaya FROM mst_anggaran_masuk WHERE periode_id = '$periode_id' AND ref_anggaran = '$ref_anggaran'";
+
+		$query = $this->db->query($sql);
+		return $query;
+	}
+
+	public function getJumlahTotalBiaya($periode_id)
+	{
+		$sql = "SELECT SUM(biaya) AS biaya FROM mst_anggaran_masuk WHERE periode_id = '$periode_id'";
+
+		$query = $this->db->query($sql);
+		return $query;		
+	}
+
+	public function getJumlahSiswa($kelas_id, $periode_id)
+	{
+		$sql = "SELECT COUNT(id) AS jumlah FROM tran_kelas_siswa WHERE kelas_id = '$kelas_id' AND periode_id = '$periode_id'";
+
+		$query = $this->db->query($sql);
+		return $query;
+	}
 }

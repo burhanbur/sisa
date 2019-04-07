@@ -42,7 +42,12 @@
                   </div>
                   <div class="form-group">
                     <label>Tanggal Lahir *</label>
-                    <input type="text" class="form-control" name="tanggal_lahir" value="<?php echo $data->tgl_lahir; ?>" required autofocus>
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" id="datepicker" class="form-control" name="tgl_lahir" value="<?php echo $data->tgl_lahir; ?>" required autofocus>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label>Jenis Kelamin *</label>

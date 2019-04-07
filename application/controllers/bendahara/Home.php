@@ -19,6 +19,13 @@ class Home extends CI_Controller {
 		$data['user']		= $this->session->userdata('username');
 		$data['role']		= $this->session->userdata('role');
 
+		$query = $this->db->select('*')->from('ref_periode')->where('status_id', 1)->get()->row();
+
+		$data['siswa']		= $this->crud->count('mst_siswa', 'status_id', 1);
+		$data['guru']		= $this->crud->count('mst_guru', 'status_id', 1);
+		$data['jurusan']	= $this->crud->count('mst_jurusan', 'status_id', 1);
+		$data['kelas']		= $this->crud->count('mst_kelas', 'periode_id', $query->id);
+
 		$this->load->view('includes/main', $data);
 	}
 }

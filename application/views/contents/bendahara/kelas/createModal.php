@@ -13,9 +13,15 @@
                     <div class="form-group">
                       <label>Nama *</label>
                       <input type="text" class="form-control" name="nama" required autofocus>
+                    </div>                    
+                    <div class="form-group">
+                      <label>Kelas *</label>
+                      <input type="radio" required autofocus name="tingkat" value="10"> Kelas X  &nbsp; &nbsp; 
+                      <input type="radio" name="tingkat" value="11"> Kelas XI  &nbsp; &nbsp;
+                      <input type="radio" name="tingkat" value="12"> Kelas XII  &nbsp; &nbsp;
                     </div>
                     <div class="form-group">
-                      <label>kelas *</label>
+                      <label>Jurusan *</label>
                       <select name="jurusan" class="form-control" required autofocus>
                         <option value=""> ----- Pilih Jurusan ----- </option>
                         <?php 
@@ -24,6 +30,28 @@
                           <?php }
                         ?>
                         </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Tahun Ajaran *</label>
+                      <select class="form-control" required autofocus disabled>
+                        <?php 
+                          $aktifPeriode = $this->db->select('id')->from('ref_periode')->where('status_id', 1)->get()->row();
+                          foreach ($periode as $row) { ?>
+                          <option <?php if($aktifPeriode->id == $row->id){echo "selected";} ?> value="<?php echo $row->id;?>"><?php echo $row->tahun_ajaran;?></option>
+                          <?php }
+                        ?>
+                        </select>
+                    </div>
+                    <!-- hidden -->
+                    <div class="hidden">
+                      <select name="periode" class="form-control" required autofocus>
+                      <?php 
+                        $aktifPeriode = $this->db->select('id')->from('ref_periode')->where('status_id', 1)->get()->row();
+                        foreach ($periode as $row) { ?>
+                        <option <?php if($aktifPeriode->id == $row->id){echo "selected";} ?> value="<?php echo $row->id;?>"><?php echo $row->tahun_ajaran;?></option>
+                        <?php }
+                      ?>
+                      </select>
                     </div>
                   </div>
                   <!-- /.box-body -->

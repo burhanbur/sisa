@@ -20,7 +20,13 @@
                   <div class="form-group">
                     <label>Nama *</label>
                     <input type="text" class="form-control" name="nama" required autofocus>
-                  </div>
+                  </div>                                     
+                    <div class="form-group">
+                      <label>Kelas *</label>
+                      <input type="radio" required autofocus name="tingkat" value="10"> Kelas X  &nbsp; &nbsp; 
+                      <input type="radio" name="tingkat" value="11"> Kelas XI  &nbsp; &nbsp;
+                      <input type="radio" name="tingkat" value="12"> Kelas XII  &nbsp; &nbsp;
+                    </div>
                   <div class="form-group">
                     <label>Jurusan *</label>
                     <select name="kelas" id="kelas_id" class="form-control" required autofocus>

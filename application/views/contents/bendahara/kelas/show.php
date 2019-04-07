@@ -15,6 +15,7 @@
                   <th class="center" style="width: 5%">No</th>
                   <th class="center" style="width: 25%">Nama</th>
                   <th class="center" style="width: 20%">Jurusan</th>
+                  <th class="center" style="width: 20%">Jumlah Siswa</th>
                   <th class="center" style="width: 15%">Aksi</th>
                 </tr>
                 </thead>
@@ -26,6 +27,7 @@
                 	<td class="center"><?php echo $no++; ?></td>
                   <td class="center"><?php echo $data->nama ?></td>
                   <td class="center"><?php echo $data->jurusan ?></td>
+                  <td class="center"><?php echo $data->jumlah ?></td>
                 	<td class="center">
 		                <a href="<?php echo base_url('bendahara/kelas/detail/'.$data->id) ?>" class="btn btn-info btn-xs"><i class="fa fa-info-circle" ></i></a>
                     <a href="<?php echo base_url('bendahara/kelas/edit/'.$data->id) ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil" ></i></a>

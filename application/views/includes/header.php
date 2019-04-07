@@ -56,7 +56,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url();?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Burhan Mafazi</span> &nbsp;
+              <span class="hidden-xs"><?php echo $this->session->userdata('nama'); ?></span> &nbsp;
               <span class="glyphicon glyphicon-triangle-bottom"></span>
             </a>
             <ul class="dropdown-menu">
@@ -65,8 +65,11 @@
                 <img src="<?php echo base_url();?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Burhan Mafazi
-                  <small>Member since 2019</small>
+                  <?php echo $this->session->userdata('nama'); ?>
+                  <small><?php 
+                  $jabatan = $this->db->select('nama')->from('ref_role')->where('id', $this->session->userdata('role'))->get()->row();
+                  echo $jabatan->nama;
+                  ?></small>
                 </p>
               </li>
               <!-- Menu Footer-->

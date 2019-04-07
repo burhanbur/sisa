@@ -54,6 +54,12 @@
     	return confirm('Apakah anda yakin akan menghapus data ini?');
  	});
 
+  //Date picker
+  $('#datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true
+  })
+
   $(document).ready(function () {
         $("#kelas_id").chainedTo("#jurusan_id");
     });

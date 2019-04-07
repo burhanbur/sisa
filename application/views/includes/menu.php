@@ -125,7 +125,7 @@
               <li class="<?php if ($uri == 'ref_agama') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_agama'); ?>"><i class="fa fa-circle-o"></i> Agama </a></li>
               <li class="<?php if ($uri == 'periode') echo 'active' ?>"><a href="<?php echo base_url('bendahara/periode'); ?>"><i class="fa fa-circle-o"></i> Periode </a></li>
 
-              <?php 
+              <!-- <?php 
               $subUri = array();
               array_push($subUri, $uri);
               $subMenu = array('ref_pendapatan', 'ref_pengeluaran');
@@ -140,7 +140,7 @@
                 <li class="<?php if ($uri == 'anggaranpendapatan') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_pendapatan'); ?>"><i class="fa fa-circle-o"></i> Pendapatan </a></li>
                 <li class="<?php if ($uri == 'anggaranpengeluaran') echo 'active' ?>"><a href="<?php echo base_url('bendahara/ref_pengeluaran'); ?>"><i class="fa fa-circle-o"></i> Pengeluaran </a></li>
               </ul>
-            </li>
+            </li> -->
             </ul>
           </li>
 
